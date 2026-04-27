@@ -1,0 +1,15 @@
+<div class = "drop-shadow flex text-lg h-10 bg-[#FFEAF5] p-5 items-center justify-between">
+    <div>
+        {{ taskData()?.name }}
+    </div>
+    <div>
+        @if (taskData()?.done) {
+            <img class = 'h-7 w-7' src = '/list/green.png'>
+        }
+        @else {
+            <div class = "flex"><img class = 'h-7 w-7' src = '/list/red_star.png'> Complete? 
+                <button class = "cursor-pointer" (click) = "completeTask(taskData()?.name)"><img class = 'h-7 w-7' src = '/list/green.png'></button>
+            </div>
+        }
+    </div>
+</div>

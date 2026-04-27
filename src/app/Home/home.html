@@ -1,0 +1,24 @@
+<div class = "min-h-dvh w-full bg-[#CCFAC7]">
+    <div>
+        <h1 class = "text-6xl p-10">To Do List</h1>
+    </div>
+
+    <!-- eventually add searching and filtering -->
+
+    <!-- add task -->
+    <div class = 'flex justify-between m-10 my-0'>
+        <input [(ngModel)] = 'newTask' class = 'lg-text-input bg-white focus:border-[#FFEAF5]-500 outline-none rounded-sm h-7 w-100 drop-shadow' type = "text">
+        <button class = 'cursor-pointer h-7 w-10 bg-[#FFEAF5] rounded-sm drop-shadow w-27 flex items-center p-2' (click) = "addTask()">
+            <img class = 'w-7 h-7' src = '/list/gyroid.png' > Add Task
+        </button>
+    </div>
+
+    <!-- list of all tasks-->
+    <div class = "bg-white rounded-md min-h-100 m-10 drop-shadow p-5 mt-5">
+        @for (task of allTasks; track task.name) {
+            <single-task [taskData] = "task" (callComplete)="markComplete($event)"/>
+        }
+    </div>
+
+    {{ allTasks }}
+</div>
