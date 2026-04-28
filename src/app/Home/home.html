@@ -16,9 +16,7 @@
     <!-- list of all tasks-->
     <div class = "bg-white rounded-md min-h-100 m-10 drop-shadow p-5 mt-5">
         @for (task of allTasks; track task.name) {
-            <single-task [taskData] = "task" (callComplete)="markComplete($event)"/>
+            <single-task [taskData] = "task" (callComplete)="markComplete($event)" (callDelete)="markDeleted($event)"/>
         }
     </div>
-
-    {{ allTasks }}
 </div>

@@ -11,10 +11,18 @@ export class Task {
 
   callComplete = output<string>();
 
+  callDelete = output<string>();
+
   completeTask(name:string | undefined) {
     if (name) {
         this.callComplete.emit(name);
         this.taskData.set({name : name, done : true});
+    }
+  }
+
+  deleteTask(name: string | undefined) {
+    if (name) {
+        this.callDelete.emit(name);
     }
   }
 }

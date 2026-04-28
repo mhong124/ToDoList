@@ -22,8 +22,11 @@ export class Home {
   ];
 
   addTask() {
-    this.allTasks.push({name : this.newTask, done: false});
-    this.newTask = '';
+    let findTask = this.allTasks.find(t => t.name == this.newTask);
+    if (!findTask) {
+      this.allTasks.push({name : this.newTask, done: false});
+      this.newTask = '';
+    }
   };
 
   markComplete(name:string) {
@@ -33,6 +36,10 @@ export class Home {
       completedTask.done = true;
       console.log(this.allTasks);
     }
+  }
+
+  markDeleted(name: string) {
+    this.allTasks = this.allTasks.filter(task => task.name != name);
   }
 
 }
