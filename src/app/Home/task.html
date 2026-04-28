@@ -5,15 +5,20 @@
             {{ taskData()?.name }}
         </div>
         <div class = "flex">
+        <div>
+            {{ taskData()?.date | date}}
+        </div>
+        <div class = "flex w-30 justify-end">
             @if (taskData()?.done) {
                 <img class = 'h-7 w-7' src = '/list/green.png'>
             }
             @else {
                 <img class = 'h-7 w-7' src = '/list/red_star.png'>
-                <button class = "cursor-pointer" (click) = "completeTask(taskData()?.name)"><img class = 'h-7 w-7' src = '/list/green.png'></button>
+                <button class = "cursor-pointer" (click) = "completeTask(taskData()?.name, taskData()?.date)"><img class = 'h-7 w-7 hover:scale-110' src = '/list/green.png'></button>
             }
             <!-- delete button -->
-            <button class = 'cursor-pointer' (click) = "deleteTask(taskData()?.name)"><img class = 'h-7 w-7' src = '/list/axe.png'></button>
+            <button class = 'cursor-pointer' (click) = "openDialog()"><img class = 'h-7 w-7 hover:scale-110' src = '/list/axe.png'></button>
+        </div>
         </div>
     </div>
 </div>

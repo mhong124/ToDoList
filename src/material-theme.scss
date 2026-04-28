@@ -36,3 +36,17 @@ body {
   margin: 0;
   height: 100%;
 }
+
+:root {
+  @include mat.datepicker-overrides((
+    calendar-body-label-text-color: pink,
+    calendar-container-background-color: #E5FFE2,
+    calendar-date-today-outline-color : #FFB8DE,
+  ));
+}
+
+.custom-thinner-picker {
+  @include mat.form-field-density(-3);
+  @include mat.icon-button-density(-3); // Makes the calendar toggle button smaller
+}
+
