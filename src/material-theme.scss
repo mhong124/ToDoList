@@ -13,7 +13,7 @@ html {
         primary: mat.$azure-palette,
         tertiary: mat.$blue-palette,
       ),
-      typography: Roboto,
+      //typography: Roboto,
       density: 0,
     )
   );
@@ -43,10 +43,35 @@ body {
     calendar-container-background-color: #E5FFE2,
     calendar-date-today-outline-color : #FFB8DE,
   ));
+  @include mat.snack-bar-overrides((
+    container-color: #A4DB9E,
+    supporting-text-color: black,
+  ));
+  @include mat.button-toggle-overrides((
+    selected-state-background-color:#FFB8DE ,
+  ));
 }
+
 
 .custom-thinner-picker {
   @include mat.form-field-density(-3);
   @include mat.icon-button-density(-3); // Makes the calendar toggle button smaller
 }
 
+/* Target the calendar container in the overlay */
+.mat-datepicker-content {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 8px; /* Optional: smooth the corners */
+}
+
+/* For Angular Material v15+ (MDC-based) */
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #FFEAF5 !important; 
+}
+
+$custom-typography: mat.m2-define-typography-config(
+  $font-family: "Gaegu, sans-serif"
+);
+
+// Apply typography to the entire application's native elements
+@include mat.typography-hierarchy($custom-typography);

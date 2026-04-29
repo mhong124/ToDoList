@@ -1,0 +1,30 @@
+<div class = "bg-[#CCFAC7] h-85 w-full flex flex-col">
+    <div class = "flex justify-center items-center">
+        <div class = "flex justify-center bg-[#FFD7EC] rounded-md w-40 shadow-lg m-4">
+            Click the villagers! {{ count }} 
+        </div>
+        @if (showBell) {
+            <img src = "/list/bell.png" class = "w-5 h-5 animate-bounce">
+        }
+    </div>
+
+    <!-- game container -->
+    <div class = "grow ">
+        @if (started) {
+            <div class = "bg-[#FFD7EC] rounded-md w-20 shadow-lg m-auto mb-4 text-center">{{ currentVillagerKey }} </div>
+            <div class = "relative">
+                <img src = "list/lilly.png" 
+                class = "w-35 h-40 m-auto" 
+                alt = "villager" 
+                (click) = "changeVillager()"
+                [ngStyle]="{'top': randomTop, 'left': randomLeft}">
+            </div>
+            <div class = "bg-[#FFD7EC] rounded-md w-70 shadow-lg m-auto mt-4 text-center">{{ currentVillagerSaying }}</div>
+        } @else {
+            <div class = "flex justify-center mt-20">
+            <button class = 'bg-[#FFD7EC] rounded-md w-30 h-10 shadow-lg mx-auto my-auto animate-bounce' (click) = "startGame()">Start Game!</button>
+            </div>
+        }
+    </div>
+    
+</div>

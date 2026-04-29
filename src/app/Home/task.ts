@@ -22,7 +22,9 @@ export class Task {
   readonly dialog = inject(MatDialog);
 
   openDialog() {
-    const dialogRef = this.dialog.open(DeleteDialog);
+    const dialogRef = this.dialog.open(DeleteDialog, {
+      data : {message : "Are you sure you want to delete this task?"}
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
