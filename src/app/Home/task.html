@@ -1,5 +1,10 @@
 <div class = "flex gap-1 items-center"> 
-    <img class = 'h-7 w-7' src = '/list/bullet.png'>
+    @if (selected) {
+        <img class = 'h-7 w-7 cursor-pointer' src = '/list/green_bullet.png' (click) = "unselect(taskData()?.name)">
+    }
+    @else {
+        <img class = 'h-7 w-7 cursor-pointer' src = '/list/bullet.png' (click) = "select(taskData()?.name)">
+    }
     <div class = "drop-shadow flex text-lg h-10 bg-[#FFEAF5] p-5 items-center justify-between mt-2 flex-1">
         <div>
             {{ taskData()?.name }}

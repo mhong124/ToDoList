@@ -17,9 +17,15 @@ export class Task {
 
   callDelete = output<string>();
 
+  callSelect = output<string>();
+
+  callUnselect = output<string>();
+
   // dialog
 
   readonly dialog = inject(MatDialog);
+
+  selected = false;
 
   openDialog() {
     const dialogRef = this.dialog.open(DeleteDialog, {
@@ -43,6 +49,20 @@ export class Task {
   deleteTask(name: string | undefined) {
     if (name) {
         this.callDelete.emit(name);
+    }
+  }
+
+  select(name : string | undefined) {
+    if (name) {
+      this.selected = true;
+      this.callSelect.emit(name);
+    }
+  }
+
+  unselect(name : string | undefined) {
+    if (name) {
+      this.selected = false;
+      this.callUnselect.emit(name);
     }
   }
 }

@@ -3,6 +3,8 @@ import { RouterOutlet, RouterLinkWithHref } from '@angular/router';
 import {Nav} from "./Nav/nav";
 import { Footer } from './Footer/footer';
 import {Game} from './Game/game';
+//import { NgCircleProgressModule } from 'ng-circle-progress';
+//import { ModuleWithProviders } from '@angular/core';
 
 @Component({
   selector: 'app-root',

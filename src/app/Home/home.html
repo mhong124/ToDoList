@@ -33,15 +33,27 @@
             <!-- delete and filter -->
             <div class = "flex gap-2 justify-center items-center pb-6">
                 <button class = 'cursor-pointer' (click) = "openDialog()"><img src = "/list/can.png" class = "h-10 w-10"></button>
-                <list-filter-toggle [(status)] = "filter" (statusChange) = "filterTasks()"></list-filter-toggle>
+                <list-filter-toggle class = "hidden md:block" [(status)] = "filter" (statusChange) = "filterTasks()"></list-filter-toggle>
             </div>
         </div>
 
         <!-- list of all tasks-->
         <div class = "bg-[#EBFFE8] rounded-md min-h-100 m-5 drop-shadow p-5">
             @for (task of displayedTasks; track task.name) {
-                <single-task [taskData] = "task" (callComplete)="markComplete($event)" (callDelete)="markDeleted($event)"/>
+                <single-task [taskData] = "task" (callComplete)="markComplete($event)" (callDelete)="markDeleted($event)"
+                 (callSelect) = "selectTask($event)" (callUnselect) = "unselectTask($event)"/>
             }
         </div>
+    </div>
+
+    <div class = "flex justify-center items-end w-4/5 mx-auto py-8 bg-white shadow-md rounded-md mt-5 h-70">
+        <img src = "/list/pink_lily.png" class = "h-10 w-10 lg:h-30 lg:w-30">
+        <img src = "/list/mabel_ac.png" class = "h-20 w-20 lg:h-40 lg:w-40">
+        <div class = "flex flex-col justify-center items-center gap-2 mx-5">
+            Progress: {{progress}} / {{allTasks.length}}
+            <progress-pie [complete] = "progress" [totalTasks] = "this.allTasks.length"/>
+        </div>
+        <img src = "/list/daisy_mae.png" class = "h-20 w-20 lg:h-40 lg:w-40">
+        <img src = "/list/pink_hya.png" class = "h-10 w-10 lg:h-30 lg:w-30">
     </div>
 </div>
