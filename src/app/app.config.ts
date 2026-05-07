@@ -8,6 +8,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { importProvidersFrom } from '@angular/core';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ModuleWithProviders } from '@angular/core';
+import { provideApiConfiguration } from './api/api-configuration';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,6 +27,7 @@ export const appConfig: ApplicationConfig = {
         innerStrokeColor: "#C7E596",
         animationDuration: 300,
       })
-    )
+    ),
+    provideApiConfiguration('https://api.nookipedia.com/'),
   ]
 };

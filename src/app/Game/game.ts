@@ -1,7 +1,10 @@
-import {Component, ChangeDetectorRef} from '@angular/core';
+import {Component, ChangeDetectorRef, inject, OnInit, signal} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 //import {AsyncPipe} from '@angular/common';
 import {CommonModule} from '@angular/common';
+import { Api } from '../api/api';
+import { villagersGet } from '../api/fn/operations/villagers-get';
+import { Villager } from '../api/models';
 
 @Component({
   selector: 'ac-game',
@@ -10,14 +13,16 @@ import {CommonModule} from '@angular/common';
   styles: [],
   imports: [CommonModule],
 })
-export class Game {
+export class Game implements OnInit {
     constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
+
+    apiService = inject(Api);
 
     count = 0;
 
-    currentVillagerKey = "";
+    currentVillagerName = "";
 
-    currentVillagerUri = "";
+    currentVillagerUrl = "";
 
     currentVillagerSaying = "";
 
@@ -30,33 +35,31 @@ export class Game {
     randomTop = '0px';
     randomLeft = '0px';
 
-    data: Record<string, { image_uri: string, saying: string}> = {};
+    //data: Record<string, { image_uri: string, saying: string}> = {};
 
-    getData() {
-        return this.http.get<Record<string, { image_uri: string, saying : string }>>('assets/villagers.json');
+    protected readonly results = signal<Villager[] | null>(null);
+
+    async ngOnInit() {
+        // Optionally, you can fetch the data on initialization
+        this.results.set(await this.apiService.invoke(villagersGet, {'X-API-KEY': import.meta.env['NG_APP_API_KEY'], 'Accept-Version': '1.7'}));
     }
 
     startGame() {
-        // fetch the json and initialize currentVillager!
-        this.getData().subscribe(result => {
-            this.data = result;
-            this.getRandomVillager();
-            this.started = true;
-            this.cdr.markForCheck(); // Manually trigger change detection
-        });
-        //this.started = true;
+        this.getRandomVillager();
+        this.started = true;
     }
 
     getRandomVillager(){
-        let keys = Object.keys(this.data);
-        let randomIndex = Math.floor(Math.random() * keys.length);
-        //console.log(randomIndex);
-        this.currentVillagerKey = keys[randomIndex];
-        //console.log(this.currentVillagerKey);
-        this.currentVillagerUri = this.data[this.currentVillagerKey]['image_uri'];
-        //console.log(this.currentVillagerUri);
-        this.currentVillagerSaying = this.data[this.currentVillagerKey]['saying'];
-        //console.log(this.currentVillagerSaying);
+        if (!this.results()) {
+            return;
+        }
+        else {
+            const randIndex = Math.floor(Math.random() * this.results()!.length);
+            this.currentVillagerName = this.results()![randIndex].name || "Error";
+            this.currentVillagerUrl = this.results()![randIndex].image_url || "";
+            this.currentVillagerSaying = this.results()![randIndex].quote || "";
+            this.randomizePosition();
+        }
     }
 
     randomizePosition() {

@@ -11,9 +11,9 @@
     <!-- game container -->
     <div class = "grow ">
         @if (started) {
-            <div class = "bg-[#FFD7EC] rounded-md w-20 shadow-lg m-auto mb-4 text-center">{{ currentVillagerKey }} </div>
+            <div class = "bg-[#FFD7EC] rounded-md w-20 shadow-lg m-auto mb-4 text-center">{{ currentVillagerName }} </div>
             <div class = "relative">
-                <img src = "list/lilly.png" 
+                <img src = "{{ currentVillagerUrl }}" 
                 class = "w-35 h-40 m-auto" 
                 alt = "villager" 
                 (click) = "changeVillager()"
