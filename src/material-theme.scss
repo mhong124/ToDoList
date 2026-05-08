@@ -50,6 +50,10 @@ body {
   @include mat.button-toggle-overrides((
     selected-state-background-color:#FFB8DE ,
   ));
+  @include mat.tabs-overrides((
+    active-focus-indicator-color:#FFB8DE ,
+    active-indicator-color: #E5FFE2,
+  ));
 }
 
 
