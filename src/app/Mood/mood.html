@@ -1,4 +1,4 @@
-<div class = "bg-[#FFD7EC] min-h-screen min-w-screen p-10">
+<div class = "bg-[#FFD7EC] min-h-screen w-full p-10 ">
     <div class = "flex items-center justify-center mx-auto drop-shadow bg-[#FAAAD5] w-1/2 h-40 rounded-md text-5xl lg:text-7xl text-bold text-white">
         <img src = "./mood/raccoon.png" class = "w-20 h-20 mr-5">
         Mood Board
@@ -9,13 +9,13 @@
         <div class = "flex justify-center items-center gap-5 w-full">
             <div #download class = "flex justify-center items-center gap-5 p-5 w-3/5 bg-[url(/mood/cute2.jpg)] drop-shadow bg-cover rounded-md">
                 <div class = 'bg-white rounded-md w-40 h-40 drop-shadow flex justify-center items-center'>
-                    <img src = 'mood/lloid.png' class = 'w-30 h-30'>
+                    <img [src]= "selectedFish()" class = 'w-30 h-30'>
                 </div>
                 <div class = 'bg-white rounded-md w-40 h-40 drop-shadow flex justify-center items-center'>
-                    <img src = 'mood/bob.png' class = 'w-30 h-30'>
+                    <img [src] = 'selectedVillager()' class = 'w-30 h-30'>
                 </div>
                 <div class = 'bg-white rounded-md w-40 h-40 drop-shadow flex justify-center items-center'>
-                    <img src = 'mood/heart.png' class = 'w-30 h-30'>
+                    <img [src] = "selectedItem()" class = 'w-30 h-30'>
                 </div>
             </div>
 
@@ -29,11 +29,15 @@
             <mat-tab-group dynamicHeight>
             <mat-tab>
                 <ng-template mat-tab-label>
-                    <img src = '/list/gyroid.png' class = 'w-5 h-5'>
-                    Gyroids
+                    <img src = '/mood/fish.png' class = 'w-5 h-5'>
+                    Fish
                 </ng-template>
-                <div class="mat-elevation-z4 h-100 overflow-y-auto p-4">
-                    Small
+                <div class="mat-elevation-z4 h-100 overflow-y-auto p-4 flex flex-wrap gap-4">
+                    @for (fish of fishResults(); track fish.url) {
+                        <div>
+                            <img [src] = 'fish.image_url' class = 'cursor-pointer w-10 h-10' (click) = 'setFish(fish.image_url || "")'>
+                        </div>
+                    }
                 </div>
             </mat-tab>
             <mat-tab>
@@ -41,8 +45,12 @@
                     <img src = '/mood/lolly.png' class = 'w-5 h-5'>
                     Villagers
                 </ng-template>
-                <div class="mat-elevation-z4  h-100 overflow-y-auto p-4">
-                    Large content
+                <div class="mat-elevation-z4  h-100 overflow-y-auto p-4 flex flex-wrap gap-4">
+                    @for (villager of villagerResults(); track villager.url) {
+                        <div>
+                            <img [src] = 'villager.image_url' class = 'cursor-pointer w-10 h-15' (click) = 'setVillager(villager.image_url || "")'>
+                        </div>
+                    }
                 </div>
             </mat-tab>
             <mat-tab>
@@ -50,8 +58,12 @@
                     <img src = '/mood/items.png' class = 'w-5 h-5'>
                     Items
                 </ng-template>
-                <div class="mat-elevation-z4 h-100 overflow-y-auto p-4">
-                    Small
+                <div class="mat-elevation-z4 h-100 overflow-y-auto p-4 flex flex-wrap gap-4">
+                    @for (item of itemResults(); track item.name) {
+                        <div>
+                            <img [src] = 'item.image_url' class = 'cursor-pointer w-10 h-10' (click) = 'setItem(item.image_url || "")'>
+                        </div>
+                    }
                 </div>
             </mat-tab>
             </mat-tab-group>
